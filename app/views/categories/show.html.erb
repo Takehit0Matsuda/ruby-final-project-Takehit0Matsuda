@@ -1,0 +1,16 @@
+<% title "View " + @category.name %>
+
+
+<h3><%= @category.description %></h3>
+
+<p style="padding-left:12.45%">
+    <%= link_to "New Meal Log", new_meal_log_path, class: "btn btn-success" %>
+    <%= link_to "Back to Categories", categories_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to All Logs", meal_logs_path, class: "btn btn-secondary" %>
+</p>
+
+<% @category.meal_logs.each do |meal_log| %>
+    <div class="card w-75 mx-auto mb-3 pt-2 ps-2" style="border-color: <%= meal_log.category.color %>; border-width: 2px;">
+        <%= render meal_log%>
+    </div>
+<% end %>

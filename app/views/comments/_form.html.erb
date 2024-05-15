@@ -1,0 +1,16 @@
+<div class="card border-success w-75 mx-auto px-3">
+    <%= bootstrap_form_with(model: [@meal_log, @comment]) do |f| %>
+    <div class="pt-2">
+    <%= f.alert_message "Please fix the errors below.", error_summary: false %>
+    </div>
+        <%= f.text_field :title %>
+        <%= f.number_field :rate %>
+        <%= f.text_area :comment_body %>
+        
+        <div class="pb-3">
+            <%= f.submit @comment.persisted? ? "Update Comment" : "Create Comment", class: "btn btn-success" %>
+            <%= link_to "Cancel", @comment.persisted? ?  meal_log_comment_path(@meal_log,@comment) : meal_log_comments_path, class: "btn btn-secondary" %>
+        </div>
+
+    <% end %>
+</div>

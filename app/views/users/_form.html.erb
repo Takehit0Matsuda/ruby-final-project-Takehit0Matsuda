@@ -1,0 +1,28 @@
+<div class="card border-success w-75 mx-auto px-3">
+    <%= bootstrap_form_with(model: @user) do |f| %>
+        <div class="pt-2">
+        <%= f.alert_message "Please fix the errors below.", error_summary: false %>
+        </div>
+        <%= f.text_field :name %>
+        <%= f.email_field :email %>
+        <% if @user.has_password? %>
+            <% if @user.persisted? %>
+                <%= f.password_field :current_password, label: "Current Password" %>
+            <% end %>    
+            <%= f.password_field :password, label: @user.persisted? ? "New Password" : "Password" %>
+            <%= f.password_field :password_confirmation, label: @user.persisted? ? "Confirm New Password" : "Confirm Password" %>
+        <% end %>
+        
+        <div class="pb-3">
+            <%= f.submit @user.persisted? ? "Update User Information" :"Sign Up", class: "btn btn-success" %>
+            <%= link_to "Cancel", @user.persisted? ?  @user : root_path, class: "btn btn-secondary" %>
+        </div>
+        
+        <% if request.path.ends_with?('signup') %>
+            <div class="pb-3">
+            <%= button_to "Sign Up with GitHub", "/auth/github", class: "btn btn-primary", data: {turbo: false} %>
+            </div>
+        <% end %>
+
+    <% end %>
+</div>

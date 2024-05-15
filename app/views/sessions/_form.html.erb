@@ -1,0 +1,19 @@
+<div class="card border-success w-75 mx-auto px-3">
+    <%= bootstrap_form_with(url: sessions_path, method: :post) do |f| %>
+        <div class="pt-2">
+        <%= f.alert_message "Please fix the errors below.", error_summary: false %>
+        </div>
+        <%= f.email_field :email %>
+        <%= f.password_field :password %>
+
+        <div class="pb-3">
+            <%= f.submit "Login", class: "btn btn-success" %>
+            <%= link_to "Cancel", root_path, class: "btn btn-secondary" %>
+        </div>
+
+    <% end %>
+    
+    <div class="pb-3">
+        <%= button_to "Login with GitHub", "/auth/github", class: "btn btn-primary", data: {turbo: false} %>
+    </div>
+</div>

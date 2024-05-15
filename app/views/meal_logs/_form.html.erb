@@ -1,0 +1,21 @@
+<div class="card border-success w-75 mx-auto px-3">
+    <%= bootstrap_form_with(model: @meal_log) do |f| %>
+    
+    <div class="pt-2">
+    <%= f.alert_message "Please fix the errors below.", error_summary: false %>
+    </div>
+        <%= f.datetime_field :Eat_date %>
+        <%= f.text_field :Meal_name %>
+        <%= f.number_field :Calorie %>
+        <%= f.text_area :Meal_description %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "Select a category" %>
+        
+        <%= f.file_field :image %>
+        
+        <div class="pb-3">
+            <%= f.submit @meal_log.persisted? ? "Update Meal Log" : "Create Meal Log", class: "btn btn-success" %>
+            <%= link_to "Cancel", @meal_log.persisted? ?  @meal_log : meal_logs_path, class: "btn btn-secondary" %>
+        </div>
+
+    <% end %>
+</div>

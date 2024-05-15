@@ -1,0 +1,12 @@
+<div id="<% dom_id(meal_log) %>" class="meal_log">
+    <p><strong>Log ID: </strong><%= link_to_unless_current meal_log.id, meal_log %></p>
+    <p><strong>Eat date:</strong> <%= meal_log.Eat_date %></p>
+    <p><strong>Meal name:</strong> <%= meal_log.Meal_name %></p>
+    <% if meal_log.image? %>
+        <%= image_tag meal_log.image.url, alt: "Meal Image" %>
+    <% end %>
+    <p><strong>Meal description:</strong> <%= meal_log.Meal_description %></p>
+    <p><strong>Calories:</strong> <%= meal_log.Calorie %></p>
+    <p><strong>Posted by:</strong> <%= meal_log.user ? meal_log.user.name : "Deleted User" %></p>
+    <p><strong>Category:</strong> <%= link_to meal_log.category.name, category_path(meal_log.category) %></p>
+</div>

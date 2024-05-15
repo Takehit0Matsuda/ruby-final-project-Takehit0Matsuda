@@ -1,0 +1,5 @@
+<div id="<% dom_id(comment) %>" class="comment">
+    <h4><%= link_to_unless_current comment.title, meal_log_comment_path(@meal_log, comment) %></h4>
+    <p><strong>Rate:</strong> <%= comment.rate %></p>
+    <p><strong>Comment body:</strong> <%= comment.comment_body %></p>
+</div>

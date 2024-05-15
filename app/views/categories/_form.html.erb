@@ -1,0 +1,14 @@
+<%= bootstrap_form_with(model: category, local: true) do |f| %>
+  <div class="pt-2">
+    <%= f.alert_message "Please fix the errors below.", error_summary: false %>
+  </div>
+
+  <%= f.text_field :name, label: "Category Name" %>
+  <%= f.text_area :description, label: "Description" %>
+  <%= f.color_field :color, label: "Category Color", class: "form-control form-control-color" %>
+
+  <div class="pb-3">
+    <%= f.submit category.persisted? ? "Update Category" : "Create Category", class: "btn btn-success" %>
+    <%= link_to "Cancel", categories_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

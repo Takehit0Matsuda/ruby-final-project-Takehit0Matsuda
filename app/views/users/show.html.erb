@@ -1,0 +1,39 @@
+<% title "User Information" %>
+
+<div class="card border-success w-75 mx-auto pt-2 ps-2">
+    <p><strong>User ID: </strong><%= @user.id %></p>
+    <p><strong>Name: </strong><%= @user.name %></p>
+    <p><strong>Email: </strong><%= @user.email %></p>
+    <% if @user.has_password? %>
+        <p><strong>Password: </strong><%= @user.password_digest %></p>
+    <% else %>
+        <p><strong>Logging in with <%= session[:login_provider] %></strong></p>
+    <% end %>
+    
+    
+    <div class="pb-2">
+      <%= link_to "Edit User Information", edit_user_path(@user), class: "btn btn-success" %>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">
+        Delete User
+      </button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <%= button_to "Yes", @user, method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+</div>

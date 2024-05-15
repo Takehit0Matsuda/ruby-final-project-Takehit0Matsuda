@@ -1,0 +1,36 @@
+<% title "View Meal Log" %>
+
+<div class="card border-success w-75 mx-auto pt-2 ps-2">
+    <%= render @meal_log %>
+    
+    <div class="pb-2">
+      <%= link_to "See Comments", meal_log_comments_path(@meal_log), class: "btn btn-primary" %>
+      <% if current_user.id == @meal_log.user&.id %>
+      <%= link_to "Edit Log", edit_meal_log_path(@meal_log), class: "btn btn-success" %>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">
+        Delete Log
+      </button>
+      <% end %>
+      <%= link_to "Back to All Logs", meal_logs_path, class: "btn btn-secondary" %>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <!--method :delete  deletes data --> 
+        <%= button_to "Yes", @meal_log, method: :delete, class: "btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Meal Log <%= " | " + yield(:title) unless yield(:title).blank? %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Begin Navbar -->
+    <nav class="navbar navbar-expand-md" style="background-color: #e3fde5;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="<%= root_path %>">Meal Log</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <%= nav_link 'Home', root_path %>
+            <%= nav_link 'About', about_path %>
+            <%= nav_link 'Components', components_path%>
+            <% if current_user %>
+              <%= nav_link 'Log data', meal_logs_path%>
+            <% end %>
+          </ul>
+          <form class="navbar-nav mb-2 mb-md-0">
+            <% if current_user %>
+              <%= nav_link current_user.name, user_path(current_user) %>
+              <%= nav_link 'Logout', logout_path %>
+            <% else %>
+              <%= nav_link 'Login', login_path %>
+              <%= nav_link 'Sign Up', signup_path %>
+            <% end %>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <main class="container-fluid">
+      <!-- Begin Flash Message Code -->
+      <div id="flash-messages" class="w-75">
+        <% flash.each do |name, msg| %>
+          <div class="alert alert-<%= name == 'notice' ? 'primary' : 'danger'%> alert-dismissable fade show d-flex justify-content-between" role="alert">
+            <p><strong><%= msg %></strong></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <% end %>
+      </div>
+      <!-- End Flash Messages Code -->
+      <div>
+        <% if @show_title %>
+          <div id="title" class="row">
+            <div class="col">
+              <h1><%= yield(:title) %></h1>
+            </div>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+    <footer class="footer mt-auto py-3 text-end" style="background-color:#232623">
+      <div class="container">
+        <span style="color:#FFFFFF">&#0169;2023 Takehito Matsuda</span>
+      </div>
+    </footer>
+  </body>
+</html>
